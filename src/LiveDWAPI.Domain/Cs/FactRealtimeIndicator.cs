@@ -1,0 +1,37 @@
+﻿namespace LiveDWAPI.Domain.Cs
+{
+    public class DimIndicator
+    {
+        public  string ? Name { get; set; }
+    }
+
+    public class FactRealtimeIndicator
+    {
+        public string? Indicator { get; set; }
+        public int? Numerator { get; set; }
+        public int? Denominator { get; set; }
+        public DateTime? AssessmentPeriod { get; set; }
+        public string? County { get; set; }
+        public string? SubCounty { get; set; }
+        public string? Sex { get; set; }
+        public string? AgeGroup { get; set; }
+        public string? FacilityName { get; set; }
+        public string? PartnerName { get; set; }
+        public string? Agency { get; set; }
+        public string? Latitude { get; set; }
+        public string? Longitude { get; set; }
+        public decimal? Lat => GetLat();
+        public decimal? Long => GetLong();
+
+        private decimal? GetLat()
+        {
+            decimal.TryParse(Latitude, out var lat);
+            return lat;
+        }
+        private decimal? GetLong()
+        {
+            decimal.TryParse(Longitude, out var lng);
+            return lng;
+        }
+    }
+}

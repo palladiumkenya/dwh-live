@@ -11,6 +11,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LiveDWAPI.Infrastructure", 
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LiveDWAPI.Web", "src\LiveDWAPI.Web\LiveDWAPI.Web.csproj", "{FE57D732-F132-44AF-92FF-4C07537A578F}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LiveDWAPI.Infrastructure.Tests", "tests\LiveDWAPI.Infrastructure.Tests\LiveDWAPI.Infrastructure.Tests.csproj", "{7361023C-FE3A-4691-9297-6549F0AFFE76}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LiveDWAPI.Application.Tests", "tests\LiveDWAPI.Application.Tests\LiveDWAPI.Application.Tests.csproj", "{5D1767F9-7291-4A9E-8EDA-9D83C8C90873}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,6 +37,14 @@ Global
 		{FE57D732-F132-44AF-92FF-4C07537A578F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{FE57D732-F132-44AF-92FF-4C07537A578F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{FE57D732-F132-44AF-92FF-4C07537A578F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7361023C-FE3A-4691-9297-6549F0AFFE76}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7361023C-FE3A-4691-9297-6549F0AFFE76}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7361023C-FE3A-4691-9297-6549F0AFFE76}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7361023C-FE3A-4691-9297-6549F0AFFE76}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5D1767F9-7291-4A9E-8EDA-9D83C8C90873}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5D1767F9-7291-4A9E-8EDA-9D83C8C90873}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5D1767F9-7291-4A9E-8EDA-9D83C8C90873}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5D1767F9-7291-4A9E-8EDA-9D83C8C90873}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
