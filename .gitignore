@@ -418,7 +418,3 @@ dist/
 
 #DEV stuff
 *.Development.json
-src/livesync/src/LiveSYNC/*.db
-
-# Artifact Folder
-StudioArtifact/
