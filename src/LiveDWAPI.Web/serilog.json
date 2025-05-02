@@ -4,9 +4,9 @@
     "MinimumLevel": {
       "Default": "Information",
       "Override": {
-        "Microsoft": "Warning",
-        "System": "Warning",
-        "Microsoft.AspNetCore": "Warning"
+        "Microsoft": "Information",
+        "System": "Information",
+        "Microsoft.AspNetCore": "Information"
       }
     },
     "WriteTo": [

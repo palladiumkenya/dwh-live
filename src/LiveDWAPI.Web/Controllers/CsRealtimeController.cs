@@ -1,3 +1,4 @@
+using LiveDWAPI.Application.Cs.Dto;
 using LiveDWAPI.Application.Cs.Queries;
 using LiveDWAPI.Domain.Cs;
 using MediatR;
@@ -18,41 +19,118 @@ public class CsRealtimeController : ControllerBase
     }
 
     [HttpGet("Indicator")]
-    [ProducesResponseType(typeof(List<DimIndicator>), 200)]
+    [ProducesResponseType(typeof(List<string>), 200)]
     public async Task<IActionResult> GetIndicator()
     {
         try
         {
             var res = await _mediator.Send(new GetDimIndicatorQuery());
-    
+
             if (res.IsSuccess)
-                return Ok(res.Value); 
-    
+                return Ok(res.Value.Select(x=>x.Name));
+
             throw new Exception($"An error occured: {res.Error}");
         }
         catch (Exception e)
         {
-            Log.Error(e,"Error loading");
+            Log.Error(e, "Error loading");
             return StatusCode(500, e.Message);
         }
     }
-    
-    [HttpGet("IndicatorData")]
-    [ProducesResponseType(typeof(List<FactRealtimeIndicator>), 200)]
+
+    [HttpGet("Points")]
+    [ProducesResponseType(typeof(IndicatorDataDto), 200)]
     public async Task<IActionResult> GetData(string indicator)
     {
         try
         {
-            var res = await _mediator.Send(new GetRealtimeIndicatorQuery(indicator));
-    
-            if (res.IsSuccess)
-                return Ok(res.Value); 
-    
-            throw new Exception($"An error occured: {res.Error}");
+            var resC = await _mediator.Send(new GetCountyPointQuery(indicator));
+            var resS = await _mediator.Send(new GetSubCountyPointQuery(indicator));
+            var resF = await _mediator.Send(new GetFacilityPointQuery(indicator));
+
+            if (resC.IsSuccess && resS.IsSuccess && resF.IsSuccess)
+                return Ok(new IndicatorDataDto()
+                {
+                    CountyPoints = resC.Value,
+                    SubCountyPoints = resS.Value,
+                    FacilityPoints = resF.Value
+                });
+
+            if (resC.IsFailure)
+                throw new Exception($"An error occured:{resC.Error}");
+            if (resS.IsFailure)
+                throw new Exception($"An error occured:{resS.Error}");
+            if (resF.IsFailure)
+                throw new Exception($"An error occured:{resF.Error}");
+
+            throw new Exception("Error occured");
         }
         catch (Exception e)
         {
-            Log.Error(e,"Error loading");
+            Log.Error(e, "Error loading");
+            return StatusCode(500, e.Message);
+        }
+    }
+    
+    [HttpGet("Points/Facility")]
+    [ProducesResponseType(typeof(List<FactFacilityPointDto>), 200)]
+    public async Task<IActionResult> GetFacilityData(string indicator)
+    {
+        try
+        {
+            var resF = await _mediator.Send(new GetFacilityPointQuery(indicator));
+
+            if (resF.IsSuccess)
+                return Ok(resF.Value);
+
+            throw new Exception($"An error occured:{resF.Error}");
+
+        }
+        catch (Exception e)
+        {
+            Log.Error(e, "Error loading");
+            return StatusCode(500, e.Message);
+        }
+    }
+    
+    [HttpGet("Points/County")]
+    [ProducesResponseType(typeof(List<FactCountyPointDto>), 200)]
+    public async Task<IActionResult> GetCountyData(string indicator)
+    {
+        try
+        {
+            var resF = await _mediator.Send(new GetCountyPointQuery(indicator));
+
+            if (resF.IsSuccess)
+                return Ok(resF.Value);
+
+            throw new Exception($"An error occured:{resF.Error}");
+
+        }
+        catch (Exception e)
+        {
+            Log.Error(e, "Error loading");
+            return StatusCode(500, e.Message);
+        }
+    }
+    
+    [HttpGet("Points/SubCounty")]
+    [ProducesResponseType(typeof(List<FactSubCountyPointDto>), 200)]
+    public async Task<IActionResult> GetSubCountyData(string indicator)
+    {
+        try
+        {
+            var resF = await _mediator.Send(new GetSubCountyPointQuery(indicator));
+
+            if (resF.IsSuccess)
+                return Ok(resF.Value);
+
+            throw new Exception($"An error occured:{resF.Error}");
+
+        }
+        catch (Exception e)
+        {
+            Log.Error(e, "Error loading");
             return StatusCode(500, e.Message);
         }
     }

@@ -13,6 +13,7 @@ public static class ApplicationServices
         this IServiceCollection services,
         IConfiguration configuration)
     { 
+        services.AddAutoMapper(Assembly.GetExecutingAssembly());
         services.AddValidatorsFromAssembly(Assembly.GetExecutingAssembly());
         services.AddMediatR(cfg =>
         {

@@ -2,7 +2,7 @@
 {
     public class DimIndicator
     {
-        public  string ? Name { get; set; }
+        public string? Name { get; set; }
     }
 
     public class FactRealtimeIndicator
@@ -22,6 +22,7 @@
         public string? Longitude { get; set; }
         public decimal? Lat => GetLat();
         public decimal? Long => GetLong();
+        public double? Rate => (Numerator * 1.0 / Denominator * 1.0) * 100;
 
         private decimal? GetLat()
         {

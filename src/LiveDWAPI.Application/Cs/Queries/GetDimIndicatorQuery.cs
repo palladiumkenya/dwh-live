@@ -28,7 +28,7 @@ public class GetDimIndicatorQueryHandler:IRequestHandler<GetDimIndicatorQuery,Re
         {
             
             var indicators =await  _context.DimIndicators
-                .OrderByDescending(x=>x.Name)
+                .OrderBy(x=>x.Name)
                 .ToListAsync(cancellationToken);
 
             return Result.Success(indicators);
