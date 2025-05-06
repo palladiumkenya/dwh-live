@@ -1,7 +1,5 @@
-using AutoMapper;
 using LiveDWAPI.Application.Cs.Dto;
 using LiveDWAPI.Application.Cs.Queries;
-using LiveDWAPI.Domain.Cs;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using Serilog;
@@ -13,12 +11,9 @@ namespace LiveDWAPI.Web.Controllers;
 public class CsRealtimePointController : ControllerBase
 {
     private readonly IMediator _mediator;
-    private readonly IMapper _mapper;
-
-    public CsRealtimePointController(IMediator mediator, IMapper mapper)
+    public CsRealtimePointController(IMediator mediator)
     {
         _mediator = mediator;
-        _mapper = mapper;
     }
 
     [HttpGet("All")]
@@ -31,7 +26,7 @@ public class CsRealtimePointController : ControllerBase
 
             if (res.IsSuccess)
             {
-                var points = new IndicatorDataDto(res.Value, _mapper);
+                var points = new IndicatorDataDto(res.Value);
                 return Ok(points);
             }
 

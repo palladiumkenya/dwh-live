@@ -1,5 +1,4 @@
-﻿using AutoMapper;
-using LiveDWAPI.Domain.Cs;
+﻿using LiveDWAPI.Domain.Cs;
 
 namespace LiveDWAPI.Application.Cs.Dto
 {
@@ -14,11 +13,11 @@ namespace LiveDWAPI.Application.Cs.Dto
         }
 
 
-        public IndicatorDataDto(List<FactRealtimeIndicator> indicators,IMapper mapper)
+        public IndicatorDataDto(List<FactRealtimeIndicator> indicators)
         {
             CountyPoints = FactCountyPointDto.Generate(indicators);
             SubCountyPoints = FactSubCountyPointDto.Generate(indicators);
-            FacilityPoints = FactFacilityPointDto.Generate(mapper, indicators);
+            FacilityPoints = FactFacilityPointDto.Generate(indicators);
         }
     }
 }
