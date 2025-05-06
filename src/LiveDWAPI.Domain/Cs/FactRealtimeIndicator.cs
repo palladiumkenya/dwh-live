@@ -5,6 +5,32 @@
         public string? Name { get; set; }
     }
 
+    public class DimRegion
+    {
+        public string? County { get; set; }
+        public string? SubCounty { get; set; }
+        public string? FacilityName { get; set; }
+    }
+    
+    public class DimSex
+    {
+        public string? Sex { get; set; }
+    }
+    
+    public class DimAgeGroup
+    {
+        public string? AgeGroup { get; set; }
+    }
+
+    
+    public class DimAgency
+    {
+        public string? Agency { get;  set;}
+        public string? PartnerName { get; set; }
+    }
+    
+    
+    
     public class FactRealtimeIndicator
     {
         public string? Indicator { get; set; }

@@ -17,6 +17,10 @@ public class CsContextTests
     public void should_Map()
     {
         Assert.That(_context.DimIndicators.FirstOrDefault(),Is.Not.Null);
+        Assert.That(_context.DimRegions.FirstOrDefault(),Is.Not.Null);
+        Assert.That(_context.DimAgencies.FirstOrDefault(),Is.Not.Null);
+        Assert.That(_context.DimAgeGroups.FirstOrDefault(),Is.Not.Null);
+        Assert.That(_context.DimSex.FirstOrDefault(),Is.Not.Null);
         Assert.That(_context.FactRealtimeIndicators.FirstOrDefault(),Is.Not.Null);
     }
 }

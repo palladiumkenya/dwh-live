@@ -2,9 +2,7 @@ using AutoMapper;
 using CSharpFunctionalExtensions;
 using FluentValidation;
 using LiveDWAPI.Application.Cs.Dto;
-using LiveDWAPI.Domain.Cs;
 using MediatR;
-using Microsoft.EntityFrameworkCore;
 using Serilog;
 
 namespace LiveDWAPI.Application.Cs.Queries;

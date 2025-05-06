@@ -1,4 +1,4 @@
-﻿using CSharpFunctionalExtensions;
+﻿using AutoMapper;
 using LiveDWAPI.Domain.Cs;
 
 namespace LiveDWAPI.Application.Cs.Dto
@@ -8,5 +8,17 @@ namespace LiveDWAPI.Application.Cs.Dto
         public List<FactCountyPointDto> CountyPoints { get; set; } = new ();
         public List<FactSubCountyPointDto> SubCountyPoints { get; set; }= new ();
         public List<FactFacilityPointDto> FacilityPoints { get; set; }= new ();
+
+        public IndicatorDataDto()
+        {
+        }
+
+
+        public IndicatorDataDto(List<FactRealtimeIndicator> indicators,IMapper mapper)
+        {
+            CountyPoints = FactCountyPointDto.Generate(indicators);
+            SubCountyPoints = FactSubCountyPointDto.Generate(indicators);
+            FacilityPoints = FactFacilityPointDto.Generate(mapper, indicators);
+        }
     }
 }

@@ -1,3 +1,4 @@
+using AutoMapper;
 using LiveDWAPI.Application.Cs.Dto;
 using LiveDWAPI.Application.Cs.Queries;
 using LiveDWAPI.Domain.Cs;
@@ -12,10 +13,12 @@ namespace LiveDWAPI.Web.Controllers;
 public class CsRealtimeController : ControllerBase
 {
     private readonly IMediator _mediator;
+    private readonly IMapper _mapper;
 
-    public CsRealtimeController(IMediator mediator)
+    public CsRealtimeController(IMediator mediator, IMapper mapper)
     {
         _mediator = mediator;
+        _mapper = mapper;
     }
 
     [HttpGet("Indicator")]
@@ -30,6 +33,50 @@ public class CsRealtimeController : ControllerBase
                 return Ok(res.Value.Select(x=>x.Name));
 
             throw new Exception($"An error occured: {res.Error}");
+        }
+        catch (Exception e)
+        {
+            Log.Error(e, "Error loading");
+            return StatusCode(500, e.Message);
+        }
+    }
+    
+    
+    [HttpGet("IndicatorData")]
+    [ProducesResponseType(typeof(FactRealtimeIndicator), 200)]
+    public async Task<IActionResult> GetData([FromQuery] FilterDto filter)
+    {
+        try
+        {
+            var res = await _mediator.Send(new GetRealtimeFilteredQuery(filter));
+
+            if (res.IsSuccess)
+                return Ok(res.Value);
+            
+            throw new Exception("Error occured");
+        }
+        catch (Exception e)
+        {
+            Log.Error(e, "Error loading");
+            return StatusCode(500, e.Message);
+        }
+    }
+    
+    [HttpGet("IndicatorData/Points")]
+    [ProducesResponseType(typeof(IndicatorDataDto), 200)]
+    public async Task<IActionResult> GetDataPoints([FromQuery] FilterDto filter)
+    {
+        try
+        {
+            var res = await _mediator.Send(new GetRealtimeFilteredQuery(filter));
+
+            if (res.IsSuccess)
+            {
+                var points = new IndicatorDataDto(res.Value, _mapper);
+                return Ok(points);
+            }
+
+            throw new Exception($"Error occured ${res.Error}");
         }
         catch (Exception e)
         {

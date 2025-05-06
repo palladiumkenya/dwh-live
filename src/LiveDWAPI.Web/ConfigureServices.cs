@@ -67,7 +67,7 @@ public static class ConfigureServices
         builder.Services.AddEndpointsApiExplorer();
         builder.Services.AddSwaggerGen(c =>
         {
-            c.SwaggerDoc("v1", new OpenApiInfo { Title = "LiveDWAPI.Web API", Version = "v1" });
+            c.SwaggerDoc("v1", new OpenApiInfo { Title = "NDW Live", Version = "v1", Description = "API for realtime NDW data"});
         });
 
         // services
