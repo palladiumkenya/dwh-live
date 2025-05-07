@@ -11,6 +11,7 @@ public class CsContextTests
     public void SetUp()
     {
         _context = TestInitializer.ServiceProvider.GetRequiredService<CsContext>();
+        _context.Initialize();
     }
     
     [Test]

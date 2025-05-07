@@ -5,7 +5,7 @@ namespace LiveDWAPI.Web
 {
     public class Program
     {
-        public static void Main(string[] args)
+        public static  void Main(string[] args)
         {
             try
             {
@@ -14,6 +14,8 @@ namespace LiveDWAPI.Web
                     .Build()
                     .SetupMiddleware();
                 Log.Information("LiveDWAPI Starting...");
+                
+                var initResponse =  ConfigureServices.SetupDatabases(app);
                 app.Run();
             }
             catch (Exception e)
