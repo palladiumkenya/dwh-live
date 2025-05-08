@@ -16,7 +16,7 @@
       {
         "Name": "File",
         "Args": {
-          "path": "Log/d2dadmin_.log",
+          "path": "Log/ld_.log",
           "restrictedToMinimumLevel": "Error",
           "rollingInterval": "Day",
           "retainedFileCountLimit": 7
