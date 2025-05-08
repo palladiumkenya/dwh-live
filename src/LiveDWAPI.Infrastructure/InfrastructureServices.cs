@@ -1,5 +1,8 @@
 using LiveDWAPI.Application.Cs;
+using LiveDWAPI.Application.Stats.Interfaces;
+using LiveDWAPI.Domain.Common;
 using LiveDWAPI.Infrastructure.Cs;
+using LiveDWAPI.Infrastructure.Stats;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -23,8 +26,10 @@ public static class InfrastructureServices
             .UseQueryTrackingBehavior(QueryTrackingBehavior.NoTracking)
         );
         
+        services.Configure<ServicesApiOptions>(configuration.GetSection(ServicesApiOptions.ServicesApi));
 
-        // services.AddScoped<ICsContext>(provider => provider.GetRequiredService<CsContext>());
+        services.AddScoped<IStatsService,StatsService>();
+        services.AddScoped<ICsContext>(provider => provider.GetRequiredService<CsContext>());
         return services;
     }
 }
