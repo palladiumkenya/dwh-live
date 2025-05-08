@@ -1,6 +1,9 @@
+using CSharpFunctionalExtensions;
 using LiveDWAPI.Application;
 using LiveDWAPI.Infrastructure;
+using LiveDWAPI.Infrastructure.Cs;
 using Microsoft.AspNetCore.HttpOverrides;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
 using Newtonsoft.Json;
 using Serilog;
@@ -105,5 +108,28 @@ public static class ConfigureServices
         //app.UseAuthorization();
         app.MapControllers();
         return app;
+    }
+    
+    public static Result SetupDatabases(IHost host)
+    {
+        Log.Information("Initializing [Checking Databases ...]");
+
+        try
+        {
+            using (var serviceScope = host.Services.CreateScope())
+            {
+                var services = serviceScope.ServiceProvider;
+                var context = services.GetRequiredService<CsContext>();
+                context.Database.Migrate();
+            }
+
+            Log.Information("Initializing [Checking Databases OK]");
+            return Result.Success();
+        }
+        catch (Exception e)
+        {
+            Log.Fatal(e, $"SetupDatabase Failure");
+            return Result.Failure(e.Message);
+        }
     }
 }

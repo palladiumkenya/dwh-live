@@ -8,7 +8,6 @@ public class FactRealtimeIndicatorConfiguration:IEntityTypeConfiguration<FactRea
 {
     public void Configure(EntityTypeBuilder<FactRealtimeIndicator> builder)
     {
-        builder.ToTable("vIndicatorData")
-            .HasNoKey();
+        builder.ToView("CSRTCombinedIndicators").HasNoKey();
     }
 }
