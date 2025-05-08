@@ -6,4 +6,5 @@ public class CurrentReportingDto
     public int FacilityCount { get; set; }
     public int CountyCount { get; set; }
     public int PartnerCount { get; set; }
+    public string PeriodInfo => Period.ToString("MMM yyyy");
 }

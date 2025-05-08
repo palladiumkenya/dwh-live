@@ -1,4 +1,6 @@
-﻿namespace LiveDWAPI.Domain.Cs
+﻿using System.ComponentModel.DataAnnotations.Schema;
+
+namespace LiveDWAPI.Domain.Cs
 {
     public class DimIndicator
     {
@@ -44,7 +46,7 @@
         public string? FacilityName { get; set; }
         public string? PartnerName { get; set; }
         public string? Agency { get; set; }
-        
+        [NotMapped]
         public int? MFLCode { get; set; }
         public string? Latitude { get; set; }
         public string? Longitude { get; set; }
