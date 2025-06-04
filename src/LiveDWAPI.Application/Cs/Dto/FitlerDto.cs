@@ -9,6 +9,7 @@ public class FilterDto
     // Place
     public string[]? County { get; set; }
     public string[]? SubCounty { get; set; }
+    public string[]? Ward { get; set; }
     public string[]? FacilityName { get; set; }
     // Person
     public string[]? Sex { get; set; }
@@ -22,6 +23,7 @@ public class FilterDto
     public bool HasEndPeriod() => EndPeriod.HasValue;
     public bool HasCounty() => County?.Length > 0;
     public bool HasSubCounty() => SubCounty?.Length > 0;
+    public bool HasWard() => Ward?.Length > 0;
     public bool HasFacilityName() => FacilityName?.Length > 0;
     public bool HasSex() => Sex?.Length > 0;
     public bool HasAgeGroup() => AgeGroup?.Length > 0;

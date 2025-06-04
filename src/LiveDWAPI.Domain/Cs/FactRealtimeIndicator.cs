@@ -49,7 +49,7 @@ namespace LiveDWAPI.Domain.Cs
         public string? PartnerName { get; set; }
         public string? Agency { get; set; }
         
-        public int? MFLCode { get; set; }
+        public string? MFLCode { get; set; }
         public string? Latitude { get; set; }
         public string? Longitude { get; set; }
         public decimal? Lat => GetLat();
