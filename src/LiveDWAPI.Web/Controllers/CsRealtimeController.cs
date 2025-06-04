@@ -70,6 +70,7 @@ public class CsRealtimeController : ControllerBase
         {
             var resC = await _mediator.Send(new GetCountyPointQuery(indicator));
             var resS = await _mediator.Send(new GetSubCountyPointQuery(indicator));
+            var resW = await _mediator.Send(new GetWardPointQuery(indicator));
             var resF = await _mediator.Send(new GetFacilityPointQuery(indicator));
 
             if (resC.IsSuccess && resS.IsSuccess && resF.IsSuccess)
@@ -77,6 +78,7 @@ public class CsRealtimeController : ControllerBase
                 {
                     CountyPoints = resC.Value,
                     SubCountyPoints = resS.Value,
+                    WardPoints =  resW.Value,
                     FacilityPoints = resF.Value
                 });
 
@@ -84,6 +86,8 @@ public class CsRealtimeController : ControllerBase
                 throw new Exception($"An error occured:{resC.Error}");
             if (resS.IsFailure)
                 throw new Exception($"An error occured:{resS.Error}");
+            if (resW.IsFailure)
+                throw new Exception($"An error occured:{resF.Error}");
             if (resF.IsFailure)
                 throw new Exception($"An error occured:{resF.Error}");
 
@@ -145,6 +149,27 @@ public class CsRealtimeController : ControllerBase
         try
         {
             var resF = await _mediator.Send(new GetSubCountyPointQuery(indicator));
+
+            if (resF.IsSuccess)
+                return Ok(resF.Value);
+
+            throw new Exception($"An error occured:{resF.Error}");
+
+        }
+        catch (Exception e)
+        {
+            Log.Error(e, "Error loading");
+            return StatusCode(500, e.Message);
+        }
+    }
+    
+    [HttpGet("Points/Ward")]
+    [ProducesResponseType(typeof(List<FactWardPointDto>), 200)]
+    public async Task<IActionResult> GetWardData(string indicator)
+    {
+        try
+        {
+            var resF = await _mediator.Send(new GetWardPointQuery(indicator));
 
             if (resF.IsSuccess)
                 return Ok(resF.Value);
