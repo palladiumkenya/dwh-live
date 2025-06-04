@@ -11,6 +11,7 @@ namespace LiveDWAPI.Domain.Cs
     {
         public string? County { get; set; }
         public string? SubCounty { get; set; }
+        public string? Ward { get; set; }
         public string? FacilityName { get; set; }
     }
     
@@ -41,12 +42,13 @@ namespace LiveDWAPI.Domain.Cs
         public DateTime? AssessmentPeriod { get; set; }
         public string? County { get; set; }
         public string? SubCounty { get; set; }
+        public string? Ward { get; set; }
         public string? Sex { get; set; }
         public string? AgeGroup { get; set; }
         public string? FacilityName { get; set; }
         public string? PartnerName { get; set; }
         public string? Agency { get; set; }
-        [NotMapped]
+        
         public int? MFLCode { get; set; }
         public string? Latitude { get; set; }
         public string? Longitude { get; set; }
