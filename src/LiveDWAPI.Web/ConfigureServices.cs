@@ -7,6 +7,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
 using Newtonsoft.Json;
 using Serilog;
+using Microsoft.Extensions.Configuration;
 
 namespace LiveDWAPI.Web;
 
@@ -27,6 +28,7 @@ public static class ConfigureServices
             .AddJsonFile($"hosting.json", optional: true, reloadOnChange: true)
             .AddJsonFile($"hosting.{environment}.json", optional: true, reloadOnChange: true)
             .AddEnvironmentVariables()
+            .AddSystemsManager("/dwhlive")
             .Build();
 
        
