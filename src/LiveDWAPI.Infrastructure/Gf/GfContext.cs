@@ -1,25 +1,22 @@
 ﻿using System.Reflection;
-using LiveDWAPI.Application.Cs;
-using LiveDWAPI.Domain.Cs;
-using LiveDWAPI.Domain.Stats;
+using LiveDWAPI.Application.Gf;
+using LiveDWAPI.Domain.Gf;
 using Microsoft.EntityFrameworkCore;
 using Serilog;
 
-namespace LiveDWAPI.Infrastructure.Cs;
+namespace LiveDWAPI.Infrastructure.Gf;
 
-public class CsContext : DbContext, ICsContext
+public class GfContext : DbContext, IGfContext
 {
-    
     public DbSet<DimIndicator> DimIndicators => Set<DimIndicator>();
     public DbSet<DimRegion> DimRegions => Set<DimRegion>();
     public DbSet<DimAgency> DimAgencies => Set<DimAgency>();
     public DbSet<DimAgeGroup> DimAgeGroups => Set<DimAgeGroup>();
     public DbSet<DimSex> DimSex => Set<DimSex>();
-    public DbSet<FactRealtimeIndicator> FactRealtimeIndicators => Set<FactRealtimeIndicator>();
-    public DbSet<ReportingHistory> ReportingHistories => Set<ReportingHistory>();
+    public DbSet<FactAggregateIndicator> FactAggregateIndicators => Set<FactAggregateIndicator>();
 
 
-    public CsContext(DbContextOptions<CsContext> options) : base(options)
+    public GfContext(DbContextOptions<GfContext> options) : base(options)
     {
     }
     

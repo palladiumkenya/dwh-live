@@ -2,6 +2,7 @@ using CSharpFunctionalExtensions;
 using LiveDWAPI.Application;
 using LiveDWAPI.Infrastructure;
 using LiveDWAPI.Infrastructure.Cs;
+using LiveDWAPI.Infrastructure.Gf;
 using Microsoft.AspNetCore.HttpOverrides;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
@@ -119,8 +120,10 @@ public static class ConfigureServices
             using (var serviceScope = host.Services.CreateScope())
             {
                 var services = serviceScope.ServiceProvider;
-                var context = services.GetRequiredService<CsContext>();
-                context.Database.Migrate();
+                var csContext = services.GetRequiredService<CsContext>();
+                var gfContext = services.GetRequiredService<GfContext>();
+                csContext.Database.Migrate();
+                gfContext.Database.Migrate();
             }
 
             Log.Information("Initializing [Checking Databases OK]");

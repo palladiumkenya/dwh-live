@@ -1,47 +1,49 @@
+using AutoMapper;
 using CSharpFunctionalExtensions;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 using Serilog;
 
-namespace LiveDWAPI.Application.Cs.Queries;
+namespace LiveDWAPI.Application.Gf.Queries;
 
 public enum FilterType
 {
     Indicator,Region,Agency,Age,Sex
 }
-public class GetFiltersQuery:IRequest<Result<object>>
+public class GetAggregateFiltersQuery:IRequest<Result<object>>
 {
     public FilterType Type { get; }
 
-    public GetFiltersQuery(FilterType type)
+    public GetAggregateFiltersQuery(FilterType type)
     {
         Type = type;
     }
 }
 
-public class GetFiltersQueryHandler:IRequestHandler<GetFiltersQuery,Result<object>>
+public class GetAggregateFiltersQueryHandler:IRequestHandler<GetAggregateFiltersQuery,Result<object>>
 {
-    private readonly ICsContext _context;
+    private readonly IGfContext _context;
 
-    public GetFiltersQueryHandler(ICsContext context)
+    public GetAggregateFiltersQueryHandler(IGfContext context)
     {
         _context = context;
     }
 
-    public async Task<Result<object>> Handle(GetFiltersQuery request, CancellationToken cancellationToken)
+    public async Task<Result<object>> Handle(GetAggregateFiltersQuery request, CancellationToken cancellationToken)
     {
         try
         {
             object? data = null;
-            
+
             if (request.Type == FilterType.Indicator)
             {
-                data = await _context.DimIndicators
+               data = await _context.DimIndicators
                     .Where(x => x.Name != null)
                     .OrderBy(x => x.Name)
                     .ToListAsync(cancellationToken);
-                
+
             }
+
             if (request.Type == FilterType.Region)
             {
                 data = await _context.DimRegions
