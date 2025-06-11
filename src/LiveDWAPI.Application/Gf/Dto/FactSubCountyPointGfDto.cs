@@ -1,19 +1,19 @@
-using LiveDWAPI.Domain.Cs;
+using LiveDWAPI.Domain.Gf;
 
-namespace LiveDWAPI.Application.Cs.Dto;
+namespace LiveDWAPI.Application.Gf.Dto;
 
-public class FactSubCountyPointDto
+public class FactSubCountyPointGfDto
 {
     public string? SubCounty { get; set; }
     public string? County { get; set; }
     public int? Count { get; set; }
     public double? Rate { get; set; }
 
-    public static List<FactSubCountyPointDto> Generate(List<FactRealtimeIndicator> indicators)
+    public static List<FactSubCountyPointGfDto> Generate(List<FactAggregateIndicator> indicators)
     {
         var points = indicators
             .GroupBy(x=>new{x.SubCounty})
-            .Select(g=> new FactSubCountyPointDto()
+            .Select(g=> new FactSubCountyPointGfDto()
             {
                 SubCounty = g.Key.SubCounty,
                 County=g.First().County,
@@ -28,7 +28,7 @@ public class FactSubCountyPointDto
     }
 }
 
-public class FactWardPointDto
+public class FactWardPointGfDto
 {
     public string? Ward { get; set; }
     public string? SubCounty { get; set; }
@@ -36,11 +36,11 @@ public class FactWardPointDto
     public int? Count { get; set; }
     public double? Rate { get; set; }
 
-    public static List<FactWardPointDto> Generate(List<FactRealtimeIndicator> indicators)
+    public static List<FactWardPointGfDto> Generate(List<FactAggregateIndicator> indicators)
     {
         var points = indicators
             .GroupBy(x=>new{x.Ward})
-            .Select(g=> new FactWardPointDto()
+            .Select(g=> new FactWardPointGfDto()
             {
                 Ward = g.Key.Ward,
                 SubCounty = g.First().SubCounty,

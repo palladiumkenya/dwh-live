@@ -1,10 +1,10 @@
-using LiveDWAPI.Application.Cs.Queries;
+using LiveDWAPI.Application.Gf.Queries;
 using MediatR;
 using Microsoft.Extensions.DependencyInjection;
 using Newtonsoft.Json;
 using Serilog;
 
-namespace LiveDWAPI.Application.Tests.Cs.Queries;
+namespace LiveDWAPI.Application.Tests.Gf.Queries;
 
 [TestFixture]
 public class GetAggregateFiltersQueryTest
@@ -20,7 +20,7 @@ public class GetAggregateFiltersQueryTest
     [TestCase(FilterType.Indicator)]
     public async Task should_Read(FilterType ftype)
     {
-        var res =await _mediator.Send(new GetFiltersQuery(ftype));
+        var res =await _mediator.Send(new GetAggregateFiltersQuery(ftype));
         Assert.That(res.IsSuccess,Is.True);
         Log.Information(JsonConvert.SerializeObject(res.Value));
     }

@@ -20,19 +20,24 @@ public class StatsService:IStatsService
     public async Task<List<SiteReporting>?> LoadCurrent()
     {
         var sites = new List<SiteReporting>();
-        
+        string url = _options.Value.NDW;
+        Log.Debug(new string('*',47));
+        Log.Debug($"Reading STATS API {url}");
+        Log.Debug(new string('*',47));
         using (HttpClient client = new HttpClient())
         {
             try
             {
-                string url = _options.Value.NDW;
+                
 
                 // Make the GET request
                 HttpResponseMessage response = await client.GetAsync(url);
 
                 // Ensure the request was successful
                 response.EnsureSuccessStatusCode();
-                
+                Log.Debug(new string('=',47));
+                Log.Debug("READ OK!");
+                Log.Debug(new string('=',47));
                 var dataAsString = await response.Content.ReadAsStringAsync();
                 sites= JsonConvert.DeserializeObject<List<SiteReporting>>(dataAsString);
             }

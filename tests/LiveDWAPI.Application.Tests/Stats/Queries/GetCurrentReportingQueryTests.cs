@@ -26,7 +26,8 @@ public class GetCurrentReportingQueryTests
     [Test]
     public async Task should_Read_Period()
     {
-        var res =await _mediator.Send(new GetCurrentReportingQuery(new DateTime(2025,04,01)));
+        var lm = DateTime.Now.AddMonths(-1);
+        var res =await _mediator.Send(new GetCurrentReportingQuery(new DateTime(lm.Year,lm.Month,01)));
         Assert.That(res.Value.FacilityCount>0,Is.True);
         Assert.That(res.IsSuccess,Is.True);
     }

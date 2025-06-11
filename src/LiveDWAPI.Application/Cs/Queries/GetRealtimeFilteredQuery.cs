@@ -51,6 +51,9 @@ public class GetRealtimeFilteredQueryHandler:IRequestHandler<GetRealtimeFiltered
             if (request.Filter.HasSubCounty())
                 query = query.Where(x =>request.Filter.SubCounty!.Contains(x.SubCounty));
             
+            if (request.Filter.HasWard())
+                query = query.Where(x =>request.Filter.Ward!.Contains(x.Ward));
+            
             if (request.Filter.HasFacilityName())
                 query = query.Where(x =>request.Filter.FacilityName!.Contains(x.FacilityName));
             

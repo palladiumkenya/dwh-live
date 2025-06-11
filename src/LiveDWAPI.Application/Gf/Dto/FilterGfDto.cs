@@ -1,11 +1,10 @@
-namespace LiveDWAPI.Application.Cs.Dto;
+using LiveDWAPI.Domain.Gf;
 
-public class FilterDto
+namespace LiveDWAPI.Application.Gf.Dto;
+
+public class FilterGfDto
 {
     public string? Indicator { get;set;  }
-    // Time
-    public DateTime? StartPeriod { get; set; }
-    public DateTime? EndPeriod { get; set; }
     // Place
     public string[]? County { get; set; }
     public string[]? SubCounty { get; set; }
@@ -19,8 +18,6 @@ public class FilterDto
     public string[]? PartnerName { get; set; }
 
     public bool HasIndicator() => !string.IsNullOrWhiteSpace(Indicator);
-    public bool HasStartPeriod() => StartPeriod.HasValue;
-    public bool HasEndPeriod() => EndPeriod.HasValue;
     public bool HasCounty() => County?.Length > 0;
     public bool HasSubCounty() => SubCounty?.Length > 0;
     public bool HasWard() => Ward?.Length > 0;
@@ -30,4 +27,24 @@ public class FilterDto
     public bool HasAgency() => Agency?.Length > 0;
     public bool HasPartnerName() => PartnerName?.Length > 0;
 }
+
+public class DimIndicatorGf:DimIndicator
+{
+}
+
+public class DimRegionGf:DimRegion
+{
+}
+    
+public class DimSexGf:DimSex
+{
+}
+    
+public class DimAgeGroupGf:DimAgeGroup
+{
+}
+
+    
+public class DimAgencyGf:DimAgency
+{}
 

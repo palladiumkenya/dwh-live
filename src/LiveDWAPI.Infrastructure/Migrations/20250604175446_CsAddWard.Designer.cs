@@ -4,6 +4,7 @@ using LiveDWAPI.Infrastructure.Cs;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace LiveDWAPI.Infrastructure.Migrations
 {
     [DbContext(typeof(CsContext))]
-    partial class CsContextModelSnapshot : ModelSnapshot
+    [Migration("20250604175446_CsAddWard")]
+    partial class CsAddWard
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -114,8 +117,8 @@ namespace LiveDWAPI.Infrastructure.Migrations
                     b.Property<string>("Longitude")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("MFLCode")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int?>("MFLCode")
+                        .HasColumnType("int");
 
                     b.Property<int?>("Numerator")
                         .HasColumnType("int");

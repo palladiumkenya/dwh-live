@@ -1,4 +1,5 @@
 using LiveDWAPI.Infrastructure.Cs;
+using LiveDWAPI.Infrastructure.Gf;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Serilog;
@@ -34,7 +35,9 @@ public class TestInitializer
 
     private void InitDB()
     {
-        var ct = ServiceProvider.GetRequiredService<CsContext>();
-        ct.Initialize();
+        var cs = ServiceProvider.GetRequiredService<CsContext>();
+        cs.Initialize();
+        var gf = ServiceProvider.GetRequiredService<GfContext>();
+        gf.Initialize();
     }
 }

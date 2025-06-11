@@ -1,6 +1,4 @@
-﻿using System.ComponentModel.DataAnnotations.Schema;
-
-namespace LiveDWAPI.Domain.Cs
+﻿namespace LiveDWAPI.Domain.Gf
 {
     public class DimIndicator
     {
@@ -31,15 +29,13 @@ namespace LiveDWAPI.Domain.Cs
         public string? Agency { get;  set;}
         public string? PartnerName { get; set; }
     }
+
     
-    
-    
-    public class FactRealtimeIndicator
+    public class FactAggregateIndicator
     {
         public string? Indicator { get; set; }
         public int? Numerator { get; set; }
         public int? Denominator { get; set; }
-        public DateTime? AssessmentPeriod { get; set; }
         public string? County { get; set; }
         public string? SubCounty { get; set; }
         public string? Ward { get; set; }
