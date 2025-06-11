@@ -17,6 +17,6 @@ public class AboutController : ControllerBase
     [HttpGet("Info")]
     public IActionResult GetInfo()
     {
-        return Ok(new{Service="live.dwapi.*",Version="0.1.0",Status="Running"});
+        return Ok(new{Service="live.dwapi.*",Version="1.0.1",Status="Running"});
     }
 }
