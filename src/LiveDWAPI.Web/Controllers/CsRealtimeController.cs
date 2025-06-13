@@ -10,6 +10,7 @@ namespace LiveDWAPI.Web.Controllers;
 
 [ApiController]
 [Route("api/[controller]")]
+[Obsolete("This endpoint is deprecated. Use /CsRealtimePoint instead.")]
 public class CsRealtimeController : ControllerBase
 {
     private readonly IMediator _mediator;
