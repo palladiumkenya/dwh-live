@@ -36,7 +36,6 @@ public static class InfrastructureServices
         );
         
         services.Configure<ServicesApiOptions>(configuration.GetSection(ServicesApiOptions.ServicesApi));
-
         services.AddScoped<IStatsService,StatsService>();
         services.AddScoped<ICsContext>(provider => provider.GetRequiredService<CsContext>());
         services.AddScoped<IGfContext>(provider => provider.GetRequiredService<GfContext>());

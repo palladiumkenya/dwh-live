@@ -1,6 +1,8 @@
 using System.Reflection;
 using FluentValidation;
 using LiveDWAPI.Application.Common;
+using LiveDWAPI.Application.Interfaces;
+using LiveDWAPI.Application.Services;
 using MediatR;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -20,6 +22,8 @@ public static class ApplicationServices
             cfg.RegisterServicesFromAssembly(Assembly.GetExecutingAssembly());
             cfg.AddBehavior(typeof(IPipelineBehavior<,>), typeof(ValidationBehaviour<,>));
         });
+        services.AddMemoryCache();
+        services.AddSingleton<ICachingService,CachingService>();
         return services;
     }
 }
