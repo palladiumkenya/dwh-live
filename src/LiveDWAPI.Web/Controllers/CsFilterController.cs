@@ -1,4 +1,5 @@
 using LiveDWAPI.Application.Cs.Queries;
+using LiveDWAPI.Application.Interfaces;
 using LiveDWAPI.Domain.Cs;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
@@ -11,6 +12,7 @@ namespace LiveDWAPI.Web.Controllers;
 public class CsFilterController : ControllerBase
 {
     private readonly IMediator _mediator;
+    private readonly ICachingService _cachingService;
 
     public CsFilterController(IMediator mediator)
     {
