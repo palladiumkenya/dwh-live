@@ -24,7 +24,7 @@ public class StatsService:IStatsService
         Log.Debug(new string('*',47));
         Log.Debug($"Reading STATS API {url}");
         Log.Debug(new string('*',47));
-        using (HttpClient client = new HttpClient())
+        using (HttpClient client = new HttpClient(IgnoreCertHandler()))
         {
             try
             {
@@ -50,5 +50,13 @@ public class StatsService:IStatsService
 
         return sites;
     }
-    
+
+    private HttpClientHandler IgnoreCertHandler()
+    {
+        return new HttpClientHandler()
+        {
+            ServerCertificateCustomValidationCallback =
+                (message, certificate2, arg3, arg4) => true
+        };
+    }
 }
