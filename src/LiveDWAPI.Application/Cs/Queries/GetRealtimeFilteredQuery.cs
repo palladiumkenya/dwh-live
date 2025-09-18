@@ -70,7 +70,10 @@ public class GetRealtimeFilteredQueryHandler:IRequestHandler<GetRealtimeFiltered
             
             if (request.Filter.HasPartnerName())
                 query = query.Where(x =>request.Filter.PartnerName!.Contains(x.PartnerName));
-         
+
+            if (request.Filter.Limit > 0)
+                query = query.Take(request.Filter.Limit);
+            
             var indicators = await query.ToListAsync(cancellationToken);
             
             return Result.Success(indicators);

@@ -53,6 +53,18 @@ public class GetRealtimeFilteredQueryTests
       Assert.That(res.IsSuccess,Is.True);
       Assert.That(res.Value.Any(),Is.True);
     }
+    [TestCase("HIV POSITIVE NOT LINKED",1)]
+    public async Task should_Read_With_Limit(string name,int  limit)
+    {
+      var filter = new FilterDto()
+      {
+        Indicator = name,
+        Limit = limit
+      };
+      var res =await _mediator!.Send(new GetRealtimeFilteredQuery(filter));
+      Assert.That(res.IsSuccess,Is.True);
+      Assert.That(res.Value.Count,Is.EqualTo(limit));
+    }
     
 /*
  [
