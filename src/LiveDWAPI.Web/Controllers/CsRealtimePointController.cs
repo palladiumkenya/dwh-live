@@ -61,4 +61,28 @@ public class CsRealtimePointController : ControllerBase
             return StatusCode(500, e.Message);
         }
     }
+    
+    [HttpGet("Data")]
+    [ProducesResponseType(typeof(IndicatorDataDto), 200)]
+    public async Task<IActionResult> GetDataByQuery([FromQuery] FilterDto filter)
+    {
+        try
+        {
+            filter.Limit = 50;
+            var res = await _mediator.Send(new GetRealtimeFilteredQuery(filter));
+
+            if (res.IsSuccess)
+            {
+                var data = res.Value;
+                return Ok(data);
+            }
+
+            throw new Exception($"Error occured ${res.Error}");
+        }
+        catch (Exception e)
+        {
+            Log.Error(e, "Error loading");
+            return StatusCode(500, e.Message);
+        }
+    }
 }

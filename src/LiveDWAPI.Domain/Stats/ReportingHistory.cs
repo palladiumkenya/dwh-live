@@ -11,6 +11,9 @@ public class ReportingHistory
     public int FacilityCount { get; set; }
     public int CountyCount { get; set; }
     public int PartnerCount { get; set; }
+    public int? CurrentFacilityCount { get; set; }
+    public int? CurrentCountyCount { get; set; }
+    public int? CurrentPartnerCount { get; set; }
     public DateTime LastUpdate { get; set; }
 
     public static ReportingHistory Generate(List<SiteReporting> liveReport)
@@ -32,6 +35,9 @@ public class ReportingHistory
         FacilityCount = newReport.FacilityCount;
         CountyCount = newReport.CountyCount;
         PartnerCount = newReport.PartnerCount;
+        CurrentFacilityCount = newReport.CurrentFacilityCount;
+        CurrentCountyCount = newReport.CurrentCountyCount;
+        CurrentPartnerCount = newReport.CurrentPartnerCount;
         LastUpdate = DateTime.Now;
     }
 }

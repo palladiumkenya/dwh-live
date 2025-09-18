@@ -16,7 +16,8 @@ public class FilterDto
     public string[]? AgeGroup { get; set; }
     // Partner
     public string[]? Agency { get;  set;}
-    public string[]? PartnerName { get; set; }
+    public string[]? PartnerName { get; set; } 
+    public int Limit = -1;
 
     public bool HasIndicator() => !string.IsNullOrWhiteSpace(Indicator);
     public bool HasStartPeriod() => StartPeriod.HasValue;
